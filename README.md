@@ -1,6 +1,6 @@
 # ssh-util
 
-dependecies: numpy, bokeh, jupyter_bokeh
+dependencies: numpy, bokeh, jupyter_bokeh, tifffile
 
 functions:
 - sliceZ( im_stack ): Scrubs through first dimension of 3D image stack
