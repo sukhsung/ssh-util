@@ -1,7 +1,8 @@
 import numpy as np
 from bokeh.plotting import figure, show
 from bokeh.layouts import layout
-from bokeh.models import ColumnDataSource, Slider, RangeSlider, CustomJS
+from bokeh.models import ColumnDataSource, Slider, RangeSlider, CustomJS, LinearColorMapper
+import bokeh.palettes
 
 def enable_notebook():
     from bokeh.io import output_notebook
@@ -29,13 +30,14 @@ def imageBC( im ):
     p.grid.grid_line_width = 0
 
     # Initialize Colormap
-    # cmap = LinearColorMapper(palette="gray", low=clim[0], high=clim[1])
+    gray = bokeh.palettes.Greys256
+    cmap = LinearColorMapper(palette=gray)
     
     #initialize a column datasource and assign first image into it
     src = ColumnDataSource(data={'im':[im]})
     
     #create the image render
-    im_rend = p.image(image='im', x=0, y=0, dw=nx, dh=ny, level="image", source=src)
+    im_rend = p.image(image='im', x=0, y=0, dw=nx, dh=ny, level="image", color_mapper=cmap, source=src)
 
 
     #a widget to put a callback on
@@ -97,7 +99,9 @@ def sliceZ( im_stack ):
     src = ColumnDataSource(data={'im':[im_stack[0]]})
     
     #create the image render
-    im_rend = p.image(image='im', x=0, y=0, dw=nx, dh=ny, level="image", source=src)
+    gray = bokeh.palettes.Greys256
+    cmap = LinearColorMapper(palette=gray)
+    im_rend = p.image(image='im', x=0, y=0, dw=nx, dh=ny, level="image", color_mapper=cmap, source=src)
 
 
     #a widget to put a callback on
